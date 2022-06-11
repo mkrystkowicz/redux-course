@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux";
-import { selectUserById } from "../users/usersSlice";
 import { Link, useParams } from "react-router-dom";
 import { useGetPostsByUserIdQuery } from "../posts/postsSlice";
+import { useGetUserQuery } from "./usersSlice";
 
 const UserPage = () => {
   const { userId } = useParams();
-  const user = useSelector((state) => selectUserById(state, Number(userId)));
+  const { data: user } = useGetUserQuery(userId);
 
   const {
     data: postsForUser,
@@ -39,4 +38,3 @@ const UserPage = () => {
 };
 
 export default UserPage;
-
